@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>YouTube Transcript Extractor (English)</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <main class="container">
+      <h1>YouTube Transcript Extractor</h1>
+      <p class="subtitle">英語字幕（en）のみを抽出します。</p>
+
+      <form method="post" class="card">
+        <label for="video_url">YouTube URL または動画ID</label>
+        <input
+          type="text"
+          id="video_url"
+          name="video_url"
+          placeholder="https://www.youtube.com/watch?v=..."
+          value="{{ video_url }}"
+          required
+        />
+        <button type="submit">Transcriptを取得</button>
+      </form>
+
+      {{ error_section }}
+
+      {{ transcript_section }}
+    </main>
+  </body>
+</html>
