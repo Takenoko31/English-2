@@ -14,14 +14,16 @@ class ApiHandler(BaseHTTPRequestHandler):
 
     def do_GET(self):  # noqa: N802
         parsed = urlparse(self.path)
+        query = parse_qs(parsed.query)
 
         if parsed.path == '/health':
             self._respond_json({'ok': True})
             return
 
-        if parsed.path == '/api/transcript':
-            query = parse_qs(parsed.query)
+        if parsed.path in {'/api/transcript', '/transcript'}:
             video_input = query.get('video', [''])[0].strip()
+            if not video_input:
+                video_input = query.get('video_id', [''])[0].strip()
             self._handle_transcript(video_input)
             return
 
