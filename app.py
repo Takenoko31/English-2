@@ -1,3 +1,4 @@
+import os
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from json import dumps
@@ -62,6 +63,7 @@ class ApiHandler(BaseHTTPRequestHandler):
 
 
 if __name__ == '__main__':
-    server = ThreadingHTTPServer(('0.0.0.0', 5000), ApiHandler)
-    print('API server running on http://0.0.0.0:5000')
+    port = int(os.environ.get('PORT', '5000'))
+    server = ThreadingHTTPServer(('0.0.0.0', port), ApiHandler)
+    print(f'API server running on http://0.0.0.0:{port}')
     server.serve_forever()
